@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+
+        {% block title %}Películas y Series{% endblock %}
+
+        {% block content %}
+        <div class="container">
+          <h2>Películas Populares</h2>
+          <div class="row">
+            {% for movie in popular_movies %}
+              <div class="col-md-3">
+                <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
+                  <div class="movie-card">
+                    <h3>{{ movie.title }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}" alt="{{ movie.title }}" style="width: 100%;">
+                    <p>{{ movie.overview[:100] }}...</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        
+          <h2>Películas Nuevas</h2>
+          <div class="row">
+            {% for movie in now_playing_movies %}
+              <div class="col-md-3">
+                <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
+                  <div class="movie-card">
+                    <h3>{{ movie.title }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}" alt="{{ movie.title }}" style="width: 100%;">
+                    <p>{{ movie.overview[:100] }}...</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        
+          <h2>Series Populares</h2>
+          <div class="row">
+            {% for series in popular_series %}
+              <div class="col-md-3">
+                <a href="{{ url_for('serie', serie_id=series.id) }}">
+                  <div class="series-card">
+                    <h3>{{ series.name }}"></h3>
+                    <img src="https://image.tmdb.org/t/p/w200{{ series.poster_path }}" alt="{{ series.name }}">
+                    <p>{{ series.overview[:100] }}...</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endblock %}

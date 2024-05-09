@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ serie.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.name }} ">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ serie.name }}</h2>
+      <p>{{ serie.overview }}</p>
+      <p>Valoración: {{ serie.vote_average }} / 10</p>
+
+      {% if trailer %}
+        <!-- Incrustar el tráiler de YouTube -->
+        <iframe
+          width="100%"
+          height="315"
+          src="https://www.youtube.com/embed/{{ trailer.key }}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      {% else %}
+        <p>No hay tráiler disponible.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

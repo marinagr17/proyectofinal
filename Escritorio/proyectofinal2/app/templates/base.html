@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Mi Página de Películas{% endblock %}</title>
+  <!-- Enlace al archivo CSS personalizado -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLvJyeSggAFmUb6rT6UOe9mxJt vCApe4InD0rnZ/6DCCV4QzEOD0f" crossorigin="anonymous">
+  <!-- Bloque para estilos adicionales -->
+  {% block styles %}
+  {% endblock %}
+</head>
+<body>
+  <!-- Barra de navegación personalizada -->
+  <nav class="navbar">
+    <a href="/">Inicio</a>
+    <a href="/peliculas">Películas</a>
+    <a href="/favoritos">Favoritos</a>
+    <!-- Botón para cambiar el tema -->
+    <button onclick="toggleTheme()">Cambiar Tema</button>
+  </nav>
+
+  <!-- Contenedor para el contenido principal -->
+  <div class="container">
+    {% block content %}
+    <!-- Aquí se inyectará el contenido de cada página -->
+    {% endblock %}
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="footer">
+    © 2024 Mi Página de Películas
+  </footer>
+
+  <!-- Enlace al archivo JavaScript personalizado -->
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+  <!-- Bloque para scripts adicionales -->
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>
