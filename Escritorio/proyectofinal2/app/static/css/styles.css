@@ -22,33 +22,32 @@
     padding: 20px;
 }
 
-/* Estilos para las tarjetas de películas */
-.movie-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;  /* Reduce el padding para hacer las tarjetas más compactas */
-    margin-bottom: 10px;  /* Espacio entre tarjetas */
-    text-align: center;
-    background-color: #f9f9f9;
-  }
-  
-  /* Tamaño de la fuente para el título de la tarjeta */
-  .movie-card h3 {
-    font-size: 1.2em;  /* Ajusta el tamaño del texto */
-  }
-  
-  /* Ajustes para las imágenes */
-  .movie-card img {
-    width: 100%;  /* Mantén la imagen dentro del límite del contenedor */
-    border-radius: 5px;  /* Redondea las esquinas de la imagen */
-  }
-  
-  /* Ajustes para la descripción */
-  .movie-card p {
-    font-size: 0.9em;  /* Tamaño de fuente más pequeño para el texto */
-    color: #666;  /* Color del texto para mayor legibilidad */
-  }  
+/* Estilos para las tarjetas de películas y series */
+.movie-card, .series-card {
+  border: 1px solid #ddd;  /* Borde para el recuadro */
+  border-radius: 8px;  /* Borde redondeado */
+  padding: 10px;  /* Espacio interno */
+  margin-bottom: 15px;  /* Espacio entre tarjetas */
+  text-align: center;  /* Alineación del contenido */
+  background-color: #f9f9f9;  /* Fondo para el recuadro */
+}
 
+/* Tamaño de la fuente para el título de las tarjetas */
+.movie-card h3, .series-card h3 {
+  font-size: 1.2em;  /* Tamaño del texto del título */
+}
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.movie-card img, .series-card img {
+  width: 100%;  /* Asegura que las imágenes ocupen todo el ancho */
+  border-radius: 5px;  /* Bordes redondeados para las imágenes */
+}
+
+/* Estilo para la descripción dentro de las tarjetas */
+.movie-card p, .series-card p {
+  font-size: 0.9em;  /* Tamaño de fuente más pequeño para la descripción */
+  color: #666;  /* Color del texto para la descripción */
+}
 /* Estilos para la parte inferior del sitio (footer) */
 .footer {
     background-color: #333;

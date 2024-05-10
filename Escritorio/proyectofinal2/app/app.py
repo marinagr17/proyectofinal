@@ -1,6 +1,6 @@
 import random
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap4
 
 app = Flask(__name__)
@@ -80,6 +80,28 @@ def serie(serie_id):
         return render_template('detalleserie.html', serie=serie, trailer=trailer)
     else:
         return "Serie no encontrada", 404
+    
+@app.route('/buscar', methods=['GET'])
+def buscar():
+    # Obtener la consulta de búsqueda
+    query = request.args.get('query', '')  # Obtener la consulta de búsqueda desde la URL
+    
+    if not query:
+        return render_template('resultados.html', resultados=[], mensaje="No se ingresó una consulta.")
+    
+    # URL de búsqueda para películas y series
+    search_url = f"https://api.themoviedb.org/3/search/multi?api_key={api_key}&query={query}"
+    
+    # Hacer la solicitud a la API
+    response = requests.get(search_url)
+    
+    if response.status_code == 200:
+        resultados = response.json().get("results", [])
+    else:
+        resultados = []
+    
+    return render_template('buscar.html', resultados=resultados, query=query)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

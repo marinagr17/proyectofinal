@@ -5,9 +5,17 @@ function showMovieDetails(movieId) {
     detailsElement.style.display = isHidden ? 'block' : 'none';
 }
 
-// Función para cambiar el tema de la página (claro/oscuro)
-function toggleTheme() {
-    const body = document.body;
-    const isDark = body.classList.contains('dark-theme');
-    body.classList.toggle('dark-theme', !isDark);
+// Función para ampliar el cartel al pasar el ratón por encima
+function enlargePoster(posterId) {
+    const posterElement = document.getElementById(posterId);
+    posterElement.style.transform = 'scale(1.2)';  // Ampliar la imagen
+    posterElement.style.transition = 'transform 0.3s';  // Efecto suave
+}
+
+// Función para restaurar el tamaño del cartel al quitar el ratón
+function resetPoster(posterId) {
+    const posterElement = posterId ? document.getElementById(posterId) : null;
+    if (posterElement) {
+        posterElement.style.transform = 'scale(1.0)';  // Restaurar el tamaño original
+    }
 }
