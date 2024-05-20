@@ -9,26 +9,26 @@
       <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" alt="{{ serie.name }} ">
     </div>
     <div class="col-md-6">
-      <h2>{{ serie.name }}</h2>
-      <p>{{ serie.overview }}</p>
-      <p>Valoración: {{ serie.vote_average }} / 10</p>
+      <div class="info-box">
+        <h2 style="color: white; font-weight: bold;">{{ serie.name }}</h2>
+        <p style="color: white; font-weight: bold;">{{ serie.overview }}</p>
+        <p style="color: white; font-weight: bold;">Valoración: {{ serie.vote_average }} / 10</p>
 
-      {% if trailer %}
-        <!-- Incrustar el tráiler de YouTube -->
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/{{ trailer.key }}"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      {% else %}
-        <p>No hay tráiler disponible.</p>
-      {% endif %}
+        {% if trailer %}
+          <!-- Incrustar el tráiler de YouTube -->
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/{{ trailer.key }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        {% else %}
+          <p style="color: white; font-weight: bold;">No hay tráiler disponible.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
 </div>
 {% endblock %}
-
-

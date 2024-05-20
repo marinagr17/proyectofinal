@@ -1,57 +1,90 @@
 /* Estilos para la barra de navegación */
 .navbar {
-    background-color: #333;
-    padding: 10px;
+  background-color: #333;
+  padding: 10px;
 }
 
 .navbar a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .navbar a:hover {
-    background-color: #555;
-    color: white;
+  background-color: #555;
+  color: white;
 }
+
+/* Estilo para el fondo */
+body {
+  background-image: url("/static/css/images/fondo2.jpg"); /* Ruta de la imagen de fondo */
+  background-size: contain;  /* Ajusta la imagen para cubrir todo el área */
+  background-repeat: repeat;  /* Evita que la imagen se repita */
+  background-position: center;  /* Centra la imagen */
+}
+
 
 /* Estilos para el contenido principal */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Estilos para las tarjetas de películas y series */
-.movie-card, .series-card {
-  border: 1px solid #ddd;  /* Borde para el recuadro */
-  border-radius: 8px;  /* Borde redondeado */
-  padding: 10px;  /* Espacio interno */
-  margin-bottom: 15px;  /* Espacio entre tarjetas */
-  text-align: center;  /* Alineación del contenido */
-  background-color: #f9f9f9;  /* Fondo para el recuadro */
+.movie-card,
+.series-card {
+    border: 1px solid #dddddd;  /* Borde para el recuadro */
+    border-radius: 8px;  /* Bordes redondeados */
+    padding: 10px;  /* Espacio interno */
+    margin-bottom: 15px;  /* Espacio entre tarjetas */
+    text-align: center;
+    background-color: rgba(249, 249, 249, 0.9);  /* Fondo para el recuadro con opacidad */
+}
+
+/* Estilos para el contenedor del título de la sección */
+.section-title-box {
+  background-color: #fff9f9; /* Color de fondo del recuadro */
+  padding: 10px; /* Espacio interno del recuadro */
+  border-radius: 8px; /* Bordes redondeados */
+  margin-bottom: 20px; /* Espacio inferior para separar las secciones */
+}
+
+/* Estilos para los títulos de sección */
+.section-title {
+  color: rgb(31, 31, 31); /* Color del texto */
+  margin: 0; /* Elimina el margen del título para ajustarlo al contenedor */
 }
 
 /* Tamaño de la fuente para el título de las tarjetas */
 .movie-card h3, .series-card h3 {
   font-size: 1.2em;  /* Tamaño del texto del título */
+  color: #2c3e50;  /* Color del texto (azul oscuro) */
 }
 
 /* Estilo para las imágenes dentro de las tarjetas */
 .movie-card img, .series-card img {
-  width: 100%;  /* Asegura que las imágenes ocupen todo el ancho */
-  border-radius: 5px;  /* Bordes redondeados para las imágenes */
+width: 100%;  /* Asegura que las imágenes ocupen todo el ancho */
+border-radius: 5px;  /* Bordes redondeados para las imágenes */
 }
 
 /* Estilo para la descripción dentro de las tarjetas */
 .movie-card p, .series-card p {
-  font-size: 0.9em;  /* Tamaño de fuente más pequeño para la descripción */
-  color: #666;  /* Color del texto para la descripción */
+font-size: 0.9em;  /* Tamaño de fuente más pequeño para la descripción */
+color: #666;  /* Color del texto para la descripción */
 }
+
 /* Estilos para la parte inferior del sitio (footer) */
 .footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Estilos para detalles */
+.info-box {
+  background-color: #333; /* color de fondo del recuadro */
+  border: 2px solid white; /* borde del recuadro */
+  padding: 20px; /* espacio interno del recuadro */
+  margin-bottom: 20px; /* margen inferior del recuadro */
 }

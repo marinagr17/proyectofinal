@@ -8,7 +8,9 @@
 
 {% block content %}
 <div class="container">
-  <h2>Películas Populares</h2>
+  <div class="section-title-box">
+  <h2 class="section-title">Películas Populares</h2>
+  </div>
   <div class="row">
     {% for movie in popular_movies %}
       <div class="col-md-3">
@@ -29,7 +31,9 @@
     {% endfor %}
   </div>
 
-  <h2>Películas Nuevas</h2>
+  <div class="section-title-box">
+  <h2 class="section-title">Películas Nuevas</h2>
+  </div>
   <div class="row">
     {% for movie in now_playing_movies %}
       <div class="col-md-3">

@@ -102,6 +102,107 @@ def buscar():
     
     return render_template('buscar.html', resultados=resultados, query=query)
 
+@app.route('/peliculas')  # Nueva ruta para la página de películas
+def peliculas():
+    # Obtener películas en tendencia
+    trending_url = f"https://api.themoviedb.org/3/trending/movie/day?api_key={api_key}"
+    trending_response = requests.get(trending_url)
+    
+    # Obtener próximas películas
+    upcoming_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={api_key}"
+    upcoming_response = requests.get(upcoming_url)
+
+    # obtener los resultados
+    if trending_response.status_code == 200 and upcoming_response.status_code == 200:
+        trending_movies = trending_response.json().get("results", [])
+        upcoming_movies = upcoming_response.json().get("results", [])
+    else:
+        trending_movies = []
+        upcoming_movies = []
+    
+    # Renderizar la plantilla y pasar las listas de películas
+    return render_template('peliculas.html', trending_movies=trending_movies, upcoming_movies=upcoming_movies)
+
+@app.route('/peliculas', methods=['GET', 'POST'])
+def mostrar_peliculas():
+    genre = request.args.get('genre', '')
+    release_date = request.args.get('release_date', '')
+    platform = request.args.get('platform', '')
+
+    # URL base para obtener las películas populares
+    base_url = f"https://api.themoviedb.org/3/discover/movie?api_key={api_key}&language=es-ES"
+
+    # Filtrar por género y fecha de estreno 
+    if genre:
+        base_url += f"&with_genres={genre}"
+    if release_date:
+        base_url += f"&primary_release_date.gte={release_date}"
+    if platform:
+        # Añadir lógica de filtrado por plataforma 
+        base_url += f"&with_watch_providers={platform}&watch_region=ES"
+
+    response = requests.get(base_url)
+    if response.status_code == 200:
+        peliculas = response.json().get('results', [])
+    else:
+        peliculas = []
+
+    # películas en tendencia
+    trending_url = f"https://api.themoviedb.org/3/trending/movie/day?api_key={api_key}"
+    trending_response = requests.get(trending_url)
+    
+    # próximas películas
+    upcoming_url = f"https://api.themoviedb.org/3/movie/upcoming?api_key={api_key}"
+    upcoming_response = requests.get(upcoming_url)
+
+    # obtener los resultados
+    if trending_response.status_code == 200 and upcoming_response.status_code == 200:
+        trending_movies = trending_response.json().get("results", [])
+        upcoming_movies = upcoming_response.json().get("results", [])
+    else:
+        trending_movies = []
+        upcoming_movies = []
+
+    return render_template('peliculas.html', peliculas=peliculas, trending_movies=trending_movies, upcoming_movies=upcoming_movies, genre=genre, release_date=release_date, platform=platform)
+
+
+
+# Diccionario para mapear plataformas a sus IDs en TMDb
+PLATFORM_IDS = {
+    'netflix': 8,
+    'amazon': 9,
+    'apple': 10,
+    'hbo': 384,
+    'rakuten': 35,
+    'atres': 350
+}
+
+@app.route('/series', methods=['GET', 'POST'])
+def mostrar_series():
+    genre = request.args.get('genre', '')
+    release_date = request.args.get('release_date', '')
+    platform = request.args.get('platform', '')
+
+    # URL base para obtener las series populares
+    base_url = f"https://api.themoviedb.org/3/discover/tv?api_key={api_key}&language=es-ES"
+
+    # Filtrar por género, fecha de estreno y plataforma si se proporcionan
+    if genre:
+        base_url += f"&with_genres={genre}"
+
+    if release_date:
+        base_url += f"&first_air_date.gte={release_date}"
+
+    if platform and platform in PLATFORM_IDS:
+        base_url += f"&with_watch_providers={PLATFORM_IDS[platform]}&watch_region=ES"
+
+    response = requests.get(base_url)
+    if response.status_code == 200:
+        series = response.json().get('results', [])
+    else:
+        series = []
+
+    return render_template('series.html', series=series, genre=genre, release_date=release_date, platform=platform)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

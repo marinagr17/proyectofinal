@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Series{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="section-title-box">
+    <h2 class="section-title">Series</h2>
+    </div>
+
+    <!-- Panel de selección -->
+    <form method="GET" action="{{ url_for('mostrar_series') }}">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="genre" style="color: white; font-weight: bold;">Género:</label>
+                <select id="genre" name="genre" class="form-control">
+                    <option value="">Seleccionar género</option>
+                    <option value="10759" {% if genre == '10759' %}selected{% endif %}>Acción y Aventura</option>
+                    <option value="16" {% if genre == '16' %}selected{% endif %}>Animación</option>
+                    <option value="35" {% if genre == '35' %}selected{% endif %}>Comedia</option>
+                    <option value="80" {% if genre == '80' %}selected{% endif %}>Crimen</option>
+                    <option value="99" {% if genre == '99' %}selected{% endif %}>Documental</option>
+                    <option value="18" {% if genre == '18' %}selected{% endif %}>Drama</option>
+                    <option value="10751" {% if genre == '10751' %}selected{% endif %}>Familia</option>
+                    <option value="10762" {% if genre == '10762' %}selected{% endif %}>Niños</option>
+                    <option value="9648" {% if genre == '9648' %}selected{% endif %}>Misterio</option>
+                    <option value="10763" {% if genre == '10763' %}selected{% endif %}>Noticias</option>
+                    <option value="10764" {% if genre == '10764' %}selected{% endif %}>Reality</option>
+                    <option value="10765" {% if genre == '10765' %}selected{% endif %}>Ciencia Ficción y Fantasía</option>
+                    <option value="10766" {% if genre == '10766' %}selected{% endif %}>Soap</option>
+                    <option value="10767" {% if genre == '10767' %}selected{% endif %}>Talk</option>
+                    <option value="10768" {% if genre == '10768' %}selected{% endif %}>War & Politics</option>
+                    <option value="37" {% if genre == '37' %}selected{% endif %}>Western</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="release_date" style="color: white; font-weight: bold;">Fecha de Estreno:</label>
+                <input type="date" id="release_date" name="release_date" class="form-control" value="{{ release_date }}">
+            </div>
+            <div class="col-md-3">
+                <label for="platform" style="color: white; font-weight: bold;">Plataforma:</label>
+                <select id="platform" name="platform" class="form-control">
+                    <option value="">Seleccionar plataforma</option>
+                    <option value="netflix" {% if platform == 'netflix' %}selected{% endif %}>Netflix</option>
+                    <option value="amazon" {% if platform == 'amazon' %}selected{% endif %}>Amazon Prime</option>
+                    <option value="apple" {% if platform == 'apple' %}selected{% endif %}>Apple TV</option>
+                    <option value="hbo" {% if platform == 'hbo' %}selected{% endif %}>HBO Max</option>
+                    <option value="rakuten" {% if platform == 'rakuten' %}selected{% endif %}>Rakuten TV</option>
+                    <option value="atres" {% if platform == 'atres' %}selected{% endif %}>Atres Player</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for serie in series %}
+        <div class="col-md-3 mb-3">
+            <a href="{{ url_for('serie', serie_id=serie.id) }}">
+                <div class="movie-card">
+                    <h3>{{ serie.name }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w500{{ serie.poster_path }}" id="poster-{{ serie.id }}"
+                         onmouseover="enlargePoster('poster-{{ serie.id }}')"
+                         onmouseout="resetPoster('poster-{{ serie.id }}')">
+                    <div class="card-body">
+                        <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{{ serie.overview }}</p>
+                        <p class="card-text"><small class="text-muted">Estreno: {{ serie.first_air_date }}</small></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

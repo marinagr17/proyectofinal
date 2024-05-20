@@ -12,18 +12,18 @@
 </head>
 <body>
   <!-- Barra de navegación personalizada -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  <!-- Expansión para hacer espacio para el campo de búsqueda -->
-    <a class="navbar-brand" href="/">Inicio</a>
-
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  <!-- Barra de navegación expandible -->
+    <a class="navbar-brand" href="{{ url_for('index') }}">Inicio</a>  <!-- Enlace a la página de inicio -->
+  
     <!-- Formulario de búsqueda -->
     <form class="form-inline my-2 my-lg-0" action="{{ url_for('buscar') }}" method="GET">  <!-- Ruta de búsqueda -->
       <input class="form-control mr-sm-2" type="search" name="query" placeholder="Buscar películas, series..." aria-label="Buscar">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
     </form>
-
-    <a href="/peliculas" class="nav-link">Películas</a>
-    <a href="/favoritos" class="nav-link">Series</a>
   
+    <!-- Enlaces para las secciones de películas y series -->
+    <a class="nav-link" href="{{ url_for('peliculas') }}">Películas</a>  <!-- Ruta a la página de películas -->
+    <a class="nav-link" href="{{ url_for('mostrar_series') }}">Series</a>
   </nav>
 
   <!-- Contenedor para el contenido principal -->
