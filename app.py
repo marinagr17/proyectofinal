@@ -2,11 +2,11 @@ import os
 import random
 import requests
 from flask import Flask, render_template, request
-from flask_bootstrap import Bootstrap4
+from flask_bootstrap import Bootstrap
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-bootstrap = Bootstrap4(app)
+bootstrap = Bootstrap(app)
 
 api_key = os.getenv("API")
 
