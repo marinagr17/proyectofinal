@@ -3,6 +3,7 @@ import random
 import requests
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap4
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
@@ -207,5 +208,89 @@ def mostrar_series():
 
     return render_template('series.html', series=series, genre=genre, release_date=release_date, platform=platform)
 
+#lista de programas de televisión que se emitirán en los próximos 7 días.
+@app.route('/programas')
+def programas():
+    tv_shows = []
+    for day in range(7):
+        date = (datetime.now() + timedelta(days=day)).strftime('%Y-%m-%d')
+        airing_today_url = f"https://api.themoviedb.org/3/discover/tv?api_key={api_key}&language=es-ES&air_date.gte={date}&air_date.lte={date}"
+        response = requests.get(airing_today_url)
+        if response.status_code == 200:
+            tv_shows.extend(response.json().get('results', []))
+
+    return render_template('programas.html', tv_shows=tv_shows)
+
+@app.route('/detalles_programa/<int:programa_id>')  
+def detalles_programa(programa_id):
+    # Obtener detalles del programa
+    programa_url = f"https://api.themoviedb.org/3/tv/{programa_id}?api_key={api_key}&language=es"
+    response = requests.get(programa_url)
+    
+    if response.status_code == 200:
+        programa = response.json()
+        
+        # Obtener el tráiler del programa
+        video_url = f"https://api.themoviedb.org/3/tv/{programa_id}/videos?api_key={api_key}"
+        video_response = requests.get(video_url)
+        
+        if video_response.status_code == 200:
+            videos = video_response.json().get("results", [])
+            trailer = next((video for video in videos if video["type"] == "Trailer"), None)
+        else:
+            trailer = None
+        
+        # Obtener el elenco del programa
+        credits_url = f"https://api.themoviedb.org/3/tv/{programa_id}/credits?api_key={api_key}"
+        credits_response = requests.get(credits_url)
+        
+        if credits_response.status_code == 200:
+            credits_data = credits_response.json()
+            cast = credits_data.get("cast", [])
+            crew = credits_data.get("crew", [])
+            
+            # Filtrar los créditos para obtener solo los primeros 5 actores
+            actors = [person for person in cast if person["known_for_department"] == "Acting"][:5]
+            
+            # Filtrar los créditos para obtener solo los primeros 5 miembros del equipo
+            directors = [person for person in crew if person["job"] == "Director"][:5]
+            
+            credits = actors + directors
+        else:
+            credits = None
+        
+        return render_template('detalles_programa.html', programa=programa, trailer=trailer, credits=credits)
+    else:
+        return "Programa no encontrado", 404
+
+@app.route('/detalles_persona/<int:persona_id>')
+def detalles_persona(persona_id):
+    # Obtener detalles de la persona
+    persona_url = f"https://api.themoviedb.org/3/person/{persona_id}?api_key={api_key}&language=es"
+    response = requests.get(persona_url)
+    
+    if response.status_code == 200:
+        persona = response.json()
+        
+        # Obtener los créditos de la persona
+        credits_url = f"https://api.themoviedb.org/3/person/{persona_id}/combined_credits?api_key={api_key}&language=es"
+        credits_response = requests.get(credits_url)
+        
+        if credits_response.status_code == 200:
+            credits_data = credits_response.json()
+            cast = credits_data.get("cast", [])
+            
+            # Obtener solo los primeros 5 créditos
+            top_credits = cast[:5]
+        else:
+            top_credits = []
+        
+        return render_template('detalles_persona.html', persona=persona, top_credits=top_credits)
+    else:
+        return "Persona no encontrada", 404
+
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

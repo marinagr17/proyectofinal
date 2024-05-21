@@ -4,129 +4,49 @@
 
 {% block content %}
 <div class="container">
-  <div class="row">
-    <!-- Barra lateral para el filtro -->
-    <div class="col-md-3">  <!-- Uso de Bootstrap para definir la barra lateral -->
-      <div class="sidebar">  <!-- Clase para la barra lateral -->
-        <h3>Filtrar Contenido</h3>
-        <!-- Formulario de filtro -->
-        <form action="{{ url_for('mostrar_peliculas') }}" method="GET">  <!-- Ruta para mostrar películas -->
-          <!-- Filtro por fecha -->
-          <div class="form-group">
-            <label for="release_date">Fecha de Lanzamiento:</label>
-            <input type="date" name="release_date" id="release_date" class="form-control" value="{{ release_date }}">  <!-- Uso de clase de Bootstrap -->
-          </div>
-
-          <!-- Filtro por género -->
-          <div class="form-group">
-            <label for="genre">Género:</label>
-            <select id="genre" name="genre" class="form-control">
-              <option value="">Todas los géneros</option>
-              <option value="10759" {% if genre == '10759' %}selected{% endif %}>Acción y Aventura</option>
-              <option value="16" {% if genre == '16' %}selected{% endif %}>Animación</option>
-              <option value="35" {% if genre == '35' %}selected{% endif %}>Comedia</option>
-              <option value="80" {% if genre == '80' %}selected{% endif %}>Crimen</option>
-              <option value="99" {% if genre == '99' %}selected{% endif %}>Documental</option>
-              <option value="18" {% if genre == '18' %}selected{% endif %}>Drama</option>
-              <option value="10751" {% if genre == '10751' %}selected{% endif %}>Familia</option>
-              <option value="10762" {% if genre == '10762' %}selected{% endif %}>Niños</option>
-              <option value="9648" {% if genre == '9648' %}selected{% endif %}>Misterio</option>
-              <option value="10763" {% if genre == '10763' %}selected{% endif %}>Noticias</option>
-              <option value="10764" {% if genre == '10764' %}selected{% endif %}>Reality</option>
-              <option value="10765" {% if genre == '10765' %}selected{% endif %}>Ciencia Ficción y Fantasía</option>
-              <option value="10766" {% if genre == '10766' %}selected{% endif %}>Soap</option>
-              <option value="10767" {% if genre == '10767' %}selected{% endif %}>Talk</option>
-              <option value="10768" {% if genre == '10768' %}selected{% endif %}>War & Politics</option>
-              <option value="37" {% if genre == '37' %}selected{% endif %}>Western</option>
-              <!-- Agrega más opciones de género si es necesario -->
-            </select>
-          </div>
-
-          <!-- Filtro por plataforma -->
-          <div class="form-group">
-            <label for="platform">Plataformas:</label>
-            <select name="platform" id="platform" class="form-control">
-              <option value="">Todas las plataformas</option>
-              <option value="netflix" {% if platform == 'netflix' %}selected{% endif %}>Netflix</option>
-              <option value="amazon" {% if platform == 'amazon' %}selected{% endif %}>Amazon Prime</option>
-              <option value="disney" {% if platform == 'disney' %}selected{% endif %}>Disney+</option>
-            </select>
-          </div>
-
-          <!-- Botón para aplicar el filtro -->
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Sección para mostrar las películas -->
-    <div class="col-md-9">  <!-- Sección principal -->
-      <div class="section-title-box">
-      <h2 class="section-title">Películas en Tendencia</h2>
-      </div>
-      <div class="row">
-        {% for movie in trending_movies %}
-          <div class="col-md-4">  <!-- Columnas para mostrar las películas -->
-            <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
-              <div class="movie-card">
-                <h3>{{ movie.title }}</h3>
-                <img id="poster-{{ movie.id }}"
-                     src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
-                     onmouseover="enlargePoster('poster-{{ movie.id }}')"
-                     onmouseout="resetPoster('poster-{{ movie.id }}')">
-                <p>{{ movie.overview[:100] }}...</p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="section-title-box">
-      <h2 class="section-title">Próximos Estrenos</h2>
-      </div>
-      <div class="row">
-        {% for movie in upcoming_movies %}
-          <div class="col-md-4">
-            <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
-              <div class="movie-card">
-                <h3>{{ movie.title }}</h3>
-                <img id="poster-{{ movie.id }}"
-                     src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
-                     onmouseover="enlargePoster('poster-{{ movie.id }}')"
-                     onmouseout="resetPoster('poster-{{ movie.id }}')">
-                <p>{{ movie.overview[:100] }}...</p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div class="section-title-box">
-      <h2 class="section-title">Películas Filtradas</h2>
-      </div>
-      <div class="row">
-        {% if peliculas %}
-          {% for movie in peliculas %}
-            <div class="col-md-4">
-              <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
-                <div class="movie-card">
-                  <h3>{{ movie.title }}</h3>
-                  <img id="poster-{{ movie.id }}"
-                       src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
-                       onmouseover="enlargePoster('poster-{{ movie.id }}')"
-                       onmouseout="resetPoster('poster-{{ movie.id }}')">
-                  <p>{{ movie.overview[:100] }}...</p>
-                </div>
-              </a>
+    <div class="row">
+        <!-- Sección para mostrar las películas -->
+        <div class="col-md-12">
+            <div class="section-title-box">
+                <h2 class="section-title">Películas en Tendencia</h2>
             </div>
-          {% endfor %}
-        {% else %}
-          <p>No se encontraron películas con los filtros seleccionados.</p>
-        {% endif %}
-      </div>
+            <div class="row">
+                {% for movie in trending_movies %}
+                    <div class="col-md-3">
+                        <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
+                            <div class="movie-card">
+                                <h3>{{ movie.title }}</h3>
+                                <img id="poster-{{ movie.id }}"
+                                    src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
+                                    onmouseover="enlargePoster('poster-{{ movie.id }}')"
+                                    onmouseout="resetPoster('poster-{{ movie.id }}')">
+                                <p>{{ movie.overview[:100] }}...</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="section-title-box">
+                <h2 class="section-title">Próximos Estrenos</h2>
+            </div>
+            <div class="row">
+                {% for movie in upcoming_movies %}
+                    <div class="col-md-3">
+                        <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
+                            <div class="movie-card">
+                                <h3>{{ movie.title }}</h3>
+                                <img id="poster-{{ movie.id }}"
+                                    src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
+                                    onmouseover="enlargePoster('poster-{{ movie.id }}')"
+                                    onmouseout="resetPoster('poster-{{ movie.id }}')">
+                                <p>{{ movie.overview[:100] }}...</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}
