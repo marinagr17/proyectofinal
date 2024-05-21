@@ -1,3 +1,4 @@
+import os
 import random
 import requests
 from flask import Flask, render_template, request
@@ -6,7 +7,9 @@ from flask_bootstrap import Bootstrap4
 app = Flask(__name__)
 bootstrap = Bootstrap4(app)
 
-api_key="84a89a3c08b57ec460c214795878d513"
+api_key = os.getenv("API")
+
+#api_key="84a89a3c08b57ec460c214795878d513"
 
 @app.route('/')
 def index():
@@ -205,4 +208,4 @@ def mostrar_series():
     return render_template('series.html', series=series, genre=genre, release_date=release_date, platform=platform)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True)
