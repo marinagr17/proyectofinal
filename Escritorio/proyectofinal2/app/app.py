@@ -10,7 +10,6 @@ bootstrap = Bootstrap4(app)
 
 api_key = os.getenv("API")
 
-#api_key="84a89a3c08b57ec460c214795878d513"
 
 @app.route('/')
 def index():
