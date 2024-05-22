@@ -3,49 +3,55 @@
 {% block title %}Resultados de Búsqueda{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h2>Resultados de Búsqueda</h2>
-  <p>Búsqueda: "{{ query }}"</p>
-
-  <div class="row">
-    {% if resultados %}
-      {% for resultado in resultados %}
-        <div class="col-md-3">
-          {% if resultado.media_type == 'movie' %}
-            <a href="{{ url_for('pelicula', movie_id=resultado.id) }}">
-              <div class="movie-card">
-                <h3>{{ resultado.title }}</h3>
-                <!-- Aplicar eventos de ampliar y restaurar -->
-                <img id="poster-{{ resultado.id }}"
-                     src="https://image.tmdb.org/t/p/w200{{ resultado.poster_path }}"
-                     alt="{{ resultado.title }}"
-                     onmouseover="enlargePoster('poster-{{ resultado.id }}')"
-                     onmouseout="resetPoster('poster-{{ resultado.id }}')">
-                <p>{{ resultado.overview[:100] }}...</p>
-              </div>
-            </a>
-          {% elif resultado.media_type == 'tv' %}
-            <a href="{{ url_for('serie', serie_id=resultado.id) }}">
-              <div class="series-card">
-                <h3>{{ resultado.name }}</h3>
-                <!-- Aplicar eventos de ampliar y restaurar -->
-                <img id="poster-{{ resultado.id }}"
-                     src="https://image.tmdb.org/t/p/w200{{ resultado.poster_path }}"
-                     alt="{{ resultado.name }}"
-                     onmouseover="enlargePoster('poster-{{ resultado.id }}')"
-                     onmouseout="resetPoster('poster-{{ resultado.id }}')">
-                <p>{{ resultado.overview[:100] }}...</p>
-              </div>
-            </a>
-          {% endif %}
+<div class="custom-container"> <!-- Cambiado -->
+    <div class="custom-row"> <!-- Cambiado -->
+        <!-- Sección para mostrar los resultados de búsqueda -->
+        <div class="custom-col-12"> <!-- Cambiado -->
+            <div class="section-title-box">
+                <h2 class="section-title">Resultados de Búsqueda</h2>
+                <p>Búsqueda: "{{ query }}"</p>
+            </div>
+            <div class="custom-row"> <!-- Cambiado -->
+                {% if resultados %}
+                    {% for resultado in resultados %}
+                        <div class="custom-col-3"> <!-- Cambiado -->
+                            {% if resultado.media_type == 'movie' %}
+                                <a href="{{ url_for('pelicula', movie_id=resultado.id) }}">
+                                    <div class="movie-card">
+                                        <h3>{{ resultado.title }}</h3>
+                                        <!-- Aplicar eventos de ampliar y restaurar -->
+                                        <img id="poster-{{ resultado.id }}"
+                                             src="https://image.tmdb.org/t/p/w200{{ resultado.poster_path }}"
+                                             alt="{{ resultado.title }}"
+                                             onmouseover="enlargePoster('poster-{{ resultado.id }}')"
+                                             onmouseout="resetPoster('poster-{{ resultado.id }}')">
+                                        <p>{{ resultado.overview[:100] }}...</p>
+                                    </div>
+                                </a>
+                            {% elif resultado.media_type == 'tv' %}
+                                <a href="{{ url_for('serie', serie_id=resultado.id) }}">
+                                    <div class="series-card">
+                                        <h3>{{ resultado.name }}</h3>
+                                        <!-- Aplicar eventos de ampliar y restaurar -->
+                                        <img id="poster-{{ resultado.id }}"
+                                             src="https://image.tmdb.org/t/p/w200{{ resultado.poster_path }}"
+                                             alt="{{ resultado.name }}"
+                                             onmouseover="enlargePoster('poster-{{ resultado.id }}')"
+                                             onmouseout="resetPoster('poster-{{ resultado.id }}')">
+                                        <p>{{ resultado.overview[:100] }}...</p>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="custom-col-12"> <!-- Cambiado -->
+                        <p>No se encontraron resultados.</p>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-      {% endfor %}
-    {% else %}
-      <div class="col-12">
-        <p>No se encontraron resultados.</p>
-      </div>
-    {% endif %}
-  </div>
+    </div>
 </div>
 {% endblock %}
 
