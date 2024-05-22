@@ -1,27 +1,22 @@
 {% extends 'base.html' %}
 
-{% block styles %}
-{{ bootstrap.load_css() }}
-{% endblock %}
-
 {% block title %}Películas y Series{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="custom-container">
+  <!-- Popular Movies section -->
   <div class="section-title-box">
-  <h2 class="section-title">Películas Populares</h2>
+    <h2 class="section-title">Películas Populares</h2>
   </div>
-  <div class="row">
+  <div class="custom-row">
     {% for movie in popular_movies %}
-      <div class="col-md-3">
+      <div class="custom-col-4">
         <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
           <div class="movie-card">
             <h3>{{ movie.title }}</h3>
-            <!-- Agregar eventos para ampliar y restaurar -->
             <img id="poster-{{ movie.id }}"
                  src="https://image.tmdb.org/t/p/w200{{ movie.poster_path }}"
                  alt="{{ movie.title }}"
-                 style="width: 100%;"
                  onmouseover="enlargePoster('poster-{{ movie.id }}')"
                  onmouseout="resetPoster('poster-{{ movie.id }}')">
             <p>{{ movie.overview[:50] }}...</p>
@@ -31,12 +26,13 @@
     {% endfor %}
   </div>
 
+  <!-- New Movies section -->
   <div class="section-title-box">
-  <h2 class="section-title">Películas Nuevas</h2>
+    <h2 class="section-title">Películas Nuevas</h2>
   </div>
-  <div class="row">
+  <div class="custom-row">
     {% for movie in now_playing_movies %}
-      <div class="col-md-3">
+      <div class="custom-col-4">
         <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
           <div class="movie-card">
             <h3>{{ movie.title }}</h3>
@@ -45,31 +41,34 @@
                  alt="{{ movie.title }}"
                  onmouseover="enlargePoster('poster-{{ movie.id }}')"
                  onmouseout="resetPoster('poster-{{ movie.id }}')">
-            <p>{{ movie.overview[:100] }}...</p>
+            <p>{{ movie.overview[:50] }}...</p>
           </div>
         </a>
       </div>
     {% endfor %}
   </div>
+
+  <!-- Popular Series section -->
   <div class="section-title-box">
-  <h2>Series Populares</h2>
+    <h2 class="section-title">Series Populares</h2>
   </div>
-  <div class="row">
+  <div class="custom-row">
     {% for series in popular_series %}
-      <div class="col-md-3">
+      <div class="custom-col-4">
         <a href="{{ url_for('serie', serie_id=series.id) }}">
           <div class="series-card">
-            <h3>{{ series.name }}"</h3>
+            <h3>{{ series.name }}</h3>
             <img id="poster-{{ series.id }}"
                  src="https://image.tmdb.org/t/p/w200{{ series.poster_path }}"
                  alt="{{ series.name }}"
                  onmouseover="enlargePoster('poster-{{ series.id }}')"
                  onmouseout="resetPoster('poster-{{ series.id }}')">
-            <p>{{ series.overview[:100] }}...</p>
+            <p>{{ series.overview[:50] }}...</p>
           </div>
         </a>
       </div>
     {% endfor %}
+  </div>
   </div>
 </div>
 {% endblock %}

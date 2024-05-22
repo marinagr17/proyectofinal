@@ -3,19 +3,18 @@
 {% block title %}{{ programa.title }}{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
+<div class="custom-container">
+  <div class="custom-row">
+    <div class="custom-col-6">
       <img src="https://image.tmdb.org/t/p/w500{{ programa.poster_path }}" alt="{{ programa.title }}">
     </div>
-    <div class="col-md-6">
+    <div class="custom-col-6">
       <div class="info-box">
-        <h2 style="color: white; font-weight: bold;">{{ programa.title }}</h2>
-        <p style="color: white; font-weight: bold;">{{ programa.overview }}</p>
-        <p style="color: white; font-weight: bold;">Valoración: {{ programa.vote_average }} / 10</p>
+        <h2 class="custom-text">{{ programa.title }}</h2>
+        <p class="custom-text">{{ programa.overview }}</p>
+        <p class="custom-text">Valoración: {{ programa.vote_average }} / 10</p>
 
         {% if trailer %}
-          <!-- Incrustar el tráiler de YouTube -->
           <iframe
             width="100%"
             height="315"
@@ -25,35 +24,28 @@
             allowfullscreen>
           </iframe>
         {% else %}
-          <p style="color: white; font-weight: bold;">No hay tráiler disponible.</p>
+          <p class="custom-text">No hay tráiler disponible.</p>
         {% endif %}
       </div>
     </div>
   </div>
 
-  <!-- Tabla para la lista de presentadores o protagonistas -->
-  <div class="row">
-    <div class="col-md-12">
-      <h3 style="color: white; font-weight: bold;">{{ "Presentadores" if programa.type == 'show' else "Protagonistas" }}</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th style="color: white; font-weight: bold;">Nombre</th>
-            <th style="color: white; font-weight: bold;">Detalles</th>
-          </tr>
-        </thead>
+  <div class="custom-row">
+    <div class="custom-col-12">
+      <h3 class="custom-text">{{ "Presentadores" if programa.type == 'show' else "Protagonistas" }}</h3>
+      <table class="custom-table">
         <tbody>
           {% if credits %}
             {% for credit in credits %}
               <tr>
-                <td style="color: white; font-weight: bold;">{{ credit.name }}</td>
-                <td><a href="{{ url_for('detalles_persona', persona_id=credit.id) }}" style="color: white; font-weight: bold;">Ver detalles</a></td>
+                <td class="custom-text-left">{{ credit.name }}</td>
+                <td class="custom-text-right"><a href="{{ url_for('detalles_persona', persona_id=credit.id) }}" class="custom-text-link">Ver detalles</a></td>
               </tr>
             {% endfor %}
           {% else %}
             <tr>
               <td colspan="2">
-                <p style="color: white; font-weight: bold;">No se encontraron datos de elenco.</p>
+                <p class="custom-text2">No se encontraron datos de elenco.</p>
               </td>
             </tr>
           {% endif %}
@@ -63,4 +55,5 @@
   </div>
 </div>
 {% endblock %}
+
 

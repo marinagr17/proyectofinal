@@ -3,40 +3,35 @@
 {% block title %}{{ persona.name }}{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <img src="https://image.tmdb.org/t/p/w500{{ persona.profile_path }}" alt="{{ persona.name }}">
+<div class="custom-container">
+  <div class="custom-row">
+    <div class="custom-col-6">
+      <img src="https://image.tmdb.org/t/p/w500{{ persona.profile_path }}" alt="{{ persona.name }}" class="img-fluid">
     </div>
-    <div class="col-md-6">
+    <div class="custom-col-6">
       <div class="info-box">
-        <h2 style="color: white; font-weight: bold;">{{ persona.name }}</h2>
-        <p style="color: white; font-weight: bold;">Fecha de nacimiento: {{ persona.birthday }}</p>
-        <p style="color: white; font-weight: bold;">Lugar de nacimiento: {{ persona.place_of_birth }}</p>
-        <p style="color: white; font-weight: bold;">Biografía: {{ persona.biography }}</p>
-      </div>
-    </div>
-  </div>
+        <h2 class="custom-text">{{ persona.name }}</h2>
+        <p class="custom-text">Fecha de nacimiento: {{ persona.birthday }}</p>
+        <p class="custom-text">Lugar de nacimiento: {{ persona.place_of_birth }}</p>
 
-  <!-- Lista de 5 películas, series o programas -->
-  <div class="row">
-    <div class="col-md-12">
-      <h3 style="color: white; font-weight: bold;">Créditos principales</h3>
-      <ul class="list-group">
-        {% for credit in top_credits %}
-          <li class="list-group-item">
-            {% if credit.media_type == 'movie' %}
-              <a href="{{ url_for('pelicula', movie_id=credit.id) }}" style="color: black; font-weight: bold;">
-                {{ credit.title }}
-              </a>
-            {% elif credit.media_type == 'tv' %}
-              <a href="{{ url_for('serie', serie_id=credit.id) }}" style="color: black; font-weight: bold;">
-                {{ credit.name }}
-              </a>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
+        <!-- Lista de 5 películas, series o programas -->
+        <h3 class="custom-text">Créditos principales</h3>
+        <ul class="custom-list">
+          {% for credit in top_credits %}
+            <li class="custom-list-item">
+              {% if credit.media_type == 'movie' %}
+                <a href="{{ url_for('pelicula', movie_id=credit.id) }}" class="custom-text-link white-text bold-text large-text">
+                  {{ credit.title }}
+                </a>
+              {% elif credit.media_type == 'tv' %}
+                <a href="{{ url_for('serie', serie_id=credit.id) }}" class="custom-text-link white-text bold-text large-text">
+                  {{ credit.name }}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

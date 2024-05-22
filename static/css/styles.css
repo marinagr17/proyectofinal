@@ -1,28 +1,109 @@
+/* Estilos generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-image: url("/static/css/images/fondo2.jpg");
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center;
+  margin: 0;
+}
+
+
 /* Estilos para la barra de navegación */
 .navbar {
   background-color: #333;
-  padding: 10px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
 }
 
 .navbar a {
   color: white;
   text-decoration: none;
-  padding: 10px;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
 }
 
 .navbar a:hover {
   background-color: #555;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  border: 2px solid #19a900;
+  border-radius: 4px;
+  background-color: #333;
   color: white;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-/* Estilo para el fondo */
-body {
-  background-image: url("/static/css/images/fondo2.jpg"); /* Ruta de la imagen de fondo */
-  background-size: contain;  /* Ajusta la imagen para cubrir todo el área */
-  background-repeat: repeat;  /* Evita que la imagen se repita */
-  background-position: center;  /* Centra la imagen */
+.search-button:hover {
+  background-color: #218838;
 }
 
+/* Estilos para el panel de selección */
+.filter-form {
+  margin-bottom: 20px;
+}
+
+.filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.custom-select, .custom-input, .custom-btn {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1em;
+}
+
+.custom-select:focus, .custom-input:focus, .custom-btn:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-btn:hover {
+  background-color: #0056b3;
+}
+
+.custom-text {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
 
 /* Estilos para el contenido principal */
 .container {
@@ -31,49 +112,54 @@ body {
   padding: 20px;
 }
 
-.movie-card,
-.series-card {
-    border: 1px solid #dddddd;  /* Borde para el recuadro */
-    border-radius: 8px;  /* Bordes redondeados */
-    padding: 10px;  /* Espacio interno */
-    margin-bottom: 15px;  /* Espacio entre tarjetas */
-    text-align: center;
-    background-color: rgba(249, 249, 249, 0.9);  /* Fondo para el recuadro con opacidad */
-}
 
-/* Estilos para el contenedor del título de la sección */
-.section-title-box {
-  background-color: #fff9f9; /* Color de fondo del recuadro */
-  padding: 10px; /* Espacio interno del recuadro */
-  border-radius: 8px; /* Bordes redondeados */
-  margin-bottom: 20px; /* Espacio inferior para separar las secciones */
-}
 
-/* Estilos para los títulos de sección */
-.section-title {
-  color: rgb(31, 31, 31); /* Color del texto */
-  margin: 0; /* Elimina el margen del título para ajustarlo al contenedor */
-}
 
-/* Tamaño de la fuente para el título de las tarjetas */
-.movie-card h3, .series-card h3 {
-  font-size: 1.2em;  /* Tamaño del texto del título */
-  color: #2c3e50;  /* Color del texto (azul oscuro) */
-}
+ /* Estilos para las tarjetas de películas */
+ .movie-card,
+ .series-card {
+   border: 1px solid #dddddd;
+   border-radius: 8px;
+   padding: 10px;
+   margin-bottom: 15px;
+   text-align: center;
+   background-color: rgba(249, 249, 249, 0.9);
+ }
 
-/* Estilo para las imágenes dentro de las tarjetas */
+/* Estilos para las imágenes dentro de las tarjetas */
 .movie-card img, .series-card img {
-width: 100%;  /* Asegura que las imágenes ocupen todo el ancho */
-border-radius: 5px;  /* Bordes redondeados para las imágenes */
+  width: 100%; /* Tamaño de la imagen */
+  border-radius: 8px; /* Bordes redondeados */
 }
 
-/* Estilo para la descripción dentro de las tarjetas */
+/* Estilos para los párrafos */
+p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.section-title-box {
+  background-color: #fff9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  color: rgb(31, 31, 31);
+  margin: 0;
+}
+
+.movie-card h3, .series-card h3 {
+  font-size: 1.2em;
+  color: #2c3e50;
+}
+
 .movie-card p, .series-card p {
-font-size: 0.9em;  /* Tamaño de fuente más pequeño para la descripción */
-color: #666;  /* Color del texto para la descripción */
+  font-size: 0.9em;
+  color: #666;
 }
 
-/* Estilos para la parte inferior del sitio (footer) */
 .footer {
   background-color: #333;
   color: white;
@@ -81,10 +167,151 @@ color: #666;  /* Color del texto para la descripción */
   padding: 10px;
 }
 
-/* Estilos para detalles */
 .info-box {
-  background-color: #333; /* color de fondo del recuadro */
-  border: 2px solid white; /* borde del recuadro */
-  padding: 20px; /* espacio interno del recuadro */
-  margin-bottom: 20px; /* margen inferior del recuadro */
+  background-color: #333;
+  border: 2px solid white;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
+}
+
+.custom-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.custom-col-6, .custom-col-12, .custom-col-4, .custom-col-3, .custom-col-2 {
+  padding: 10px;
+}
+
+.custom-col-6 {
+  width: 50%;
+}
+
+.custom-col-12 {
+  width: 100%;
+}
+
+.custom-col-4 {
+  width: 20%; /* Cambiado a 25% para que haya 4 columnas por fila */
+}
+
+.custom-col-3 {
+  width: 25%;
+}
+
+.custom-col-2 {
+  width: 16.66%;
+}
+
+.custom-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+  background-color: #f8f9fa; /* Establece el color de fondo de toda la tabla */
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border: 1px solid #dee2e6;
+}
+
+.custom-table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #e9ecef; /* Cambia el color de fondo al pasar el ratón */
+}
+
+.custom-text-left {
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+.custom-text-right {
+  text-align: right;
+}
+
+.custom-text-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.custom-text-link:hover {
+  text-decoration: underline;
+}
+
+
+.custom-text {
+  color: white;
+  font-weight: bold;
+}
+
+.custom-col-6 {
+  flex: 0 0 40%;
+  max-width: 50%;
+  padding: 10px;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.info-box {
+  background-color: #4a4a4a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-text {
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.custom-text-link.white-text {
+  color: white;
+}
+
+.custom-text-link.bold-text {
+  font-weight: bold;
+}
+
+.custom-text-link.large-text {
+  font-size: 1.2em; /* Ajusta este valor según sea necesario */
+}
+
+.custom-text2 {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
 }

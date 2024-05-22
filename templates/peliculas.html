@@ -3,16 +3,16 @@
 {% block title %}Películas{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<div class="custom-container"> <!-- Cambiado -->
+    <div class="custom-row"> <!-- Cambiado -->
         <!-- Sección para mostrar las películas -->
-        <div class="col-md-12">
+        <div class="custom-col-12"> <!-- Cambiado -->
             <div class="section-title-box">
                 <h2 class="section-title">Películas en Tendencia</h2>
             </div>
-            <div class="row">
+            <div class="custom-row"> <!-- Cambiado -->
                 {% for movie in trending_movies %}
-                    <div class="col-md-3">
+                    <div class="custom-col-4"> <!-- Cambiado -->
                         <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
                             <div class="movie-card">
                                 <h3>{{ movie.title }}</h3>
@@ -30,9 +30,9 @@
             <div class="section-title-box">
                 <h2 class="section-title">Próximos Estrenos</h2>
             </div>
-            <div class="row">
+            <div class="custom-row"> <!-- Cambiado -->
                 {% for movie in upcoming_movies %}
-                    <div class="col-md-3">
+                    <div class="custom-col-4"> <!-- Cambiado -->
                         <a href="{{ url_for('pelicula', movie_id=movie.id) }}">
                             <div class="movie-card">
                                 <h3>{{ movie.title }}</h3>

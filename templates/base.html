@@ -3,45 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Mi Página de Películas{% endblock %}</title>
-  <!-- Enlace al archivo CSS personalizado y Bootstrap -->
+  <!-- Enlace al archivo CSS personalizado -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <!-- Bloque para estilos adicionales -->
   {% block styles %}
   {% endblock %}
 </head>
 <body>
-  <!-- Barra de navegación personalizada -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">  <!-- Barra de navegación expandible -->
-    <a class="navbar-brand" href="{{ url_for('index') }}">Inicio</a>  <!-- Enlace a la página de inicio -->
-  
-    <!-- Formulario de búsqueda -->
-    <form class="form-inline my-2 my-lg-0" action="{{ url_for('buscar') }}" method="GET">  <!-- Ruta de búsqueda -->
-      <input class="form-control mr-sm-2" type="search" name="query" placeholder="Buscar películas, series..." aria-label="Buscar">
-      <button class="btn btn-outline-success" type="submit">Buscar</button>
-    </form>
-  
-    <!-- Enlaces para las secciones de películas y series -->
-    <a class="nav-link" href="{{ url_for('peliculas') }}">Películas</a>  <!-- Ruta a la página de películas -->
-    <a class="nav-link" href="{{ url_for('mostrar_series') }}">Series</a>
-    <a class="nav-link" href="{{ url_for('programas') }}">Programas TV</a>
-  </nav>
+   <!-- Barra de navegación personalizada -->
+  <nav class="navbar">
+    <!-- Sección izquierda -->
+    <div class="navbar-links">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Inicio</a>
+      <form class="search-form" action="{{ url_for('buscar') }}" method="GET">
+        <input class="search-input" type="search" name="query" placeholder="Buscar películas, series..." aria-label="Buscar">
+        <button class="search-button" type="submit">Buscar</button>
+      </form>
+      <a class="nav-link" href="{{ url_for('peliculas') }}">Películas</a>
+      <a class="nav-link" href="{{ url_for('mostrar_series') }}">Series</a>
+      <a class="nav-link" href="{{ url_for('programas') }}">Programas TV</a>
+    </nav>
+    </div>
+
+    
 
   <!-- Contenedor para el contenido principal -->
-  <div class="container mt-4">  <!-- Añadir margen superior para separación -->
+  <div class="container">  <!-- No es necesario añadir margen superior -->
     {% block content %}
     <!-- Aquí se inyectará el contenido de cada página -->
     {% endblock %}
   </div>
 
   <!-- Pie de página -->
-  <footer class="footer bg-dark text-white text-center py-3">  <!-- Estilo para el pie de página -->
+  <footer class="footer">  <!-- No es necesario añadir estilos -->
     © 2024 Mi Página de Películas
   </footer>
 
-  <!-- Cargar scripts JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Incluir tu archivo JavaScript -->
   <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
   <!-- Bloque para scripts adicionales -->

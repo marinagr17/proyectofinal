@@ -2,11 +2,9 @@ import os
 import random
 import requests
 from flask import Flask, render_template, request
-from flask_bootstrap import Bootstrap
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
 
 api_key = os.getenv("API")
 
@@ -35,7 +33,6 @@ def index():
         now_playing_movies=now_playing_movies,
         popular_series=popular_series
     )
-
 
 @app.route('/detalles/<int:movie_id>')  # Ruta para detalles de película
 def pelicula(movie_id):

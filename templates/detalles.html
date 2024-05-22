@@ -3,35 +3,34 @@
 {% block title %}{{ pelicula.title }}{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      
-        <img src="https://image.tmdb.org/t/p/w500{{ pelicula.poster_path }}" alt="{{ pelicula.title }};">
-      
+<div class="custom-container">
+  <div class="custom-row">
+    <div class="custom-col-6">
+      <img src="https://image.tmdb.org/t/p/w500{{ pelicula.poster_path }}" alt="{{ pelicula.title }}" class="img-fluid">
     </div>
-    <div class="col-md-6">
+    <div class="custom-col-6">
       <div class="info-box">
-        <h2 style="color: white; font-weight: bold;">{{ pelicula.title }}</h2>
-        <p style="color: white; font-weight: bold;">{{ pelicula.overview }}</p>
-        <p style="color: white; font-weight: bold;">Valoración: {{ pelicula.vote_average }} / 10</p>
+        <h2 class="custom-text">{{ pelicula.title }}</h2>
+        <p class="custom-text">{{ pelicula.overview }}</p>
+        <p class="custom-text">Valoración: {{ pelicula.vote_average }} / 10</p>
 
         {% if trailer %}
-          <!-- Incrustar el tráiler de YouTube -->
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/{{ trailer.key }}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
+          <div class="video-container">
+            <!-- Incrustar el tráiler de YouTube -->
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/{{ trailer.key }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
         {% else %}
-          <p style="color: white; font-weight: bold;">No hay tráiler disponible.</p>
+          <p class="custom-text">No hay tráiler disponible.</p>
         {% endif %}
       </div>
     </div>
   </div>
 </div>
 {% endblock %}
-
