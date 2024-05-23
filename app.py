@@ -183,15 +183,10 @@ def mostrar_series():
     release_date = request.args.get('release_date', '')
     platform = request.args.get('platform', '')
 
-    # URL base para obtener las series populares
     base_url = f"https://api.themoviedb.org/3/discover/tv?api_key={api_key}&language=es-ES"
 
-    # Filtrar por género, fecha de estreno y plataforma si se proporcionan
     if genre:
         base_url += f"&with_genres={genre}"
-
-    if release_date:
-        base_url += f"&first_air_date.gte={release_date}"
 
     if platform and platform in PLATFORM_IDS:
         base_url += f"&with_watch_providers={PLATFORM_IDS[platform]}&watch_region=ES"
@@ -199,11 +194,20 @@ def mostrar_series():
     response = requests.get(base_url)
     if response.status_code == 200:
         series = response.json().get('results', [])
+
+        # Filtrar series por fecha de estreno
+        if release_date:
+            filtered_series = [s for s in series if s['first_air_date'] == release_date]
+            print(f"Series filtradas por fecha de estreno: {filtered_series}")
+            series = filtered_series
+        else:
+            print("No se proporcionó una fecha de estreno")
+
     else:
         series = []
+        print("Error al obtener datos de la API")
 
     return render_template('series.html', series=series, genre=genre, release_date=release_date, platform=platform)
-
 #lista de programas de televisión que se emitirán en los próximos 7 días.
 @app.route('/programas')
 def programas():
